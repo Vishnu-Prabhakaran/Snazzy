@@ -2,7 +2,7 @@ import React from 'react'
 import './sign-in.syles.scss';
 import FormInput from '../../components/form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-
+import {signInWithGoogle} from '../../firebase/firebase.utils';
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -54,9 +54,16 @@ handleChange = event => {
             label="password"
             required />
 
-            <CustomButton type='submit' >
-            SIGN IN
-            </CustomButton>
+
+
+            <div className='buttons'>
+                <CustomButton type='submit' >sign in </CustomButton>
+                <CustomButton onClick={signInWithGoogle} isGoogleSignIn > 
+                {' '}
+                Sign in with Google{' '} 
+                </CustomButton>
+            </div>
+            
             </form>
            
            
