@@ -1,6 +1,8 @@
 import React from 'react'
 import './sign-in.syles.scss';
 import FormInput from '../../components/form-input/form-input.component';
+import CustomButton from '../custom-button/custom-button.component';
+
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -52,7 +54,9 @@ handleChange = event => {
             label="password"
             required />
 
-            <input type='submit' value='Submit Form'/>
+            <CustomButton type='submit' >
+            SIGN IN
+            </CustomButton>
             </form>
            
            
