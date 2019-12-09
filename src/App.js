@@ -36,10 +36,11 @@ class App extends React.Component {
                 id: snapShot.id,
                 ...snapShot.data()
               }
-            },
+            }
             // to see the setsate, call as a second function
             //() => { console.log(this.state);}
           );
+          console.log(this.state);
         });
         //this wont work here
         //console.log(this.state);
@@ -48,7 +49,6 @@ class App extends React.Component {
       this.setState({ currentUser: userAuth });
     });
   }
-
 
   // signout
   componentWillUnmount() {
