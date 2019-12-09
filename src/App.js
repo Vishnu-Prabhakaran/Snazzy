@@ -40,7 +40,7 @@ class App extends React.Component {
             // to see the setsate, call as a second function
             //() => { console.log(this.state);}
           );
-          console.log(this.state);
+          //console.log(this.state);
         });
         //this wont work here
         //console.log(this.state);
