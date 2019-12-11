@@ -18,7 +18,7 @@ class SignIn extends React.Component {
     event.preventDefault();
 
     //destructure the state
-    const {email, password} = this.state;
+    const { email, password } = this.state;
     try {
       await auth.signInWithEmailAndPassword(email, password);
       //if that suceeds then clear the state
@@ -26,8 +26,6 @@ class SignIn extends React.Component {
     } catch (error) {
       console.log(error);
     }
-
-    
   };
 
   handleChange = event => {
