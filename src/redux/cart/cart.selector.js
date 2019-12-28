@@ -1,17 +1,23 @@
 import { createSelector } from "reselect";
 
-// input selector - return a slice of the state
+// Input selector - return a slice of the state
 const selectCart = state => state.cart;
 
-//output selector
-
+// Output selector
 export const selectCartItems = createSelector(
-  //returns a collection of input selector
+  // Returns a collection of input selector
   [selectCart],
-  // second value is a function that returns thee value of the inputselector
+  // Second value is a function that returns thee value of the inputselector
   cart => cart.cartItems
 );
 
+// To move cart.hidden value into Cache
+export const selectCartHidden = createSelector(
+  [selectCart],
+  cart => cart.hidden
+);
+
+// To get the total QTY in the cart by using reducer()
 export const selectCartItemsCount = createSelector(
   [selectCartItems],
   cartItems =>

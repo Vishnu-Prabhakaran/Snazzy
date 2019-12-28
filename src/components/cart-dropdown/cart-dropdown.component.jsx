@@ -3,6 +3,9 @@ import "./cart-dropdown.styles.scss";
 import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 import { connect } from "react-redux";
+
+// Get Cart items from Catch
+import { createStructuredSelector } from "reselect";
 import { selectCartItems } from "../../redux/cart/cart.selector";
 
 const CartDropdown = ({ cartItems }) => (
@@ -16,9 +19,9 @@ const CartDropdown = ({ cartItems }) => (
   </div>
 );
 
-// bringing the cartItems from the cache
-const mapStateToProps = state => ({
-  cartItems: selectCartItems(state)
+// Bringing the cartItems from the cache
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems
 });
 
 export default connect(mapStateToProps)(CartDropdown);

@@ -13,6 +13,9 @@ import {
 // Connect to update the reducer
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
+// Get the user from Cache
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./redux/user/user.selector";
 
 class App extends React.Component {
   // redux - sate managment -this is not required
@@ -79,7 +82,7 @@ class App extends React.Component {
               this.props.currentUser ? (
                 <Redirect to="/" />
               ) : (
-                <SignInAndSignUpPage/>
+                <SignInAndSignUpPage />
               )
             }
           />
@@ -90,16 +93,21 @@ class App extends React.Component {
 }
 
 // current user from the redux state
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+// const mapStateToProps = ({ user }) => ({
+// currentUser: user.currentUser
+// });
+
+// Getting values form the Cache instead of the redux state
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
-// null as the first argumenst as we do not need any state to props from the reducer
-// second argument with 'dspatch' property and will take a function and return an object
-// the props 'mapDispatchToProps dispatches the new action to user action SET_CURRENT_USER
+// Null as the first argumenst as we do not need any state to props from the reducer
+// Second argument with 'dspatch' property and will take a function and return an object
+// The props 'mapDispatchToProps dispatches the new action to user action SET_CURRENT_USER
 const mapDispatchToProps = dispatch => ({
-  // calls the function user and calls dispatch
-  // what ever object passing to dispatch will be an action object tyhat it will pass it to all reducer
+  // Calls the function user and calls dispatch
+  // What ever object passing to dispatch will be an action object tyhat it will pass it to all reducer
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 

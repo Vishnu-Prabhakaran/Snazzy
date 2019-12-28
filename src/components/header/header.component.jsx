@@ -2,13 +2,18 @@ import React from "react";
 import "./header.style.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { auth } from "../../firebase/firebase.utils";
-// connect is a higher order component of redux which lets us modify components, and pass in 2 functions
-import { connect } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CardDropdown from "../cart-dropdown/cart-dropdown.component";
+// Firebase
+import { auth } from "../../firebase/firebase.utils";
+// Connect is a higher order component of redux which lets us modify components, and pass in 2 functions
+import { connect } from "react-redux";
+// createStructuredSelector - to pass state ima structured way
+import { createStructuredSelector } from "reselect";
+import { selectCartHidden } from "../../redux/cart/cart.selector";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 
-// once you pull the value of current user and hidden from redux state to use below
+// Once you pull the value of current user and hidden from redux state to use below
 
 const Header = ({ currentUser, hidden }) => (
   <div className="header">
@@ -23,7 +28,7 @@ const Header = ({ currentUser, hidden }) => (
         CONTACT
       </Link>
 
-      {//conditional to show the sign in and sign out
+      {// Conditional to show the sign in and sign out
       currentUser ? (
         <div className="option" onClick={() => auth.signOut()}>
           SIGN OUT
@@ -40,17 +45,24 @@ const Header = ({ currentUser, hidden }) => (
   </div>
 );
 
-//const mapStateToProps = state => ({
-//currentUser: state.user.currentUser
+// const mapStateToProps = state => ({
+// currentUser: state.user.currentUser
 //});
 
-// new way to destructure above  mapStateToProps
-// from redux get the current user from user
-// also hidden true or false from cart
+// A new way to destructure above  mapStateToProps
+// From redux get the current user from user
+// Also hidden true or false from cart
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden
+// Normal way without using createStructuredSelector - correct but its repetitive
+// const mapStateToProps = (state) => ({
+// currentUser: selectCartHidden(state),
+// hidden: selectCurrentUser(state)
+// });
+
+// Using createStructuredSelector
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden
 });
 
 export default connect(mapStateToProps)(Header);
