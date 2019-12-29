@@ -11,18 +11,30 @@ const CartReducer = (state = INITIAL_STATE, action) => {
     case CartActionTypes.TOGGLE_CART_HIDDEN:
       return {
         ...state,
-        // change to the opposite
+        // Change to the opposite
         hidden: !state.hidden
       };
-    //cartitems
+    // cartitems
     case CartActionTypes.ADD_ITEM:
       return {
         ...state,
-        //load the old state and modify it to add the payload
-        //cartItems:[...state.cartItems, action.payload]
-        //newcode to incude the utils to remove duplicates
+        // Load the old state and modify it to add the payload
+        // CartItems:[...state.cartItems, action.payload]
+        // Newcode to incude the utils to remove duplicates
         cartItems: addItemToCart(state.cartItems, action.payload)
       };
+
+      // Remove items from the cart
+      case CartActionTypes.CLEAR_ITEM_FROM_CART:
+        return{
+          ...state,
+          // Call the existing cartitems in our array and use filter functiom
+          cartItems: state.cartItems.filter(
+            // If the cartitem id does not match the itemn we are trying to filter then return true
+            // Which means keep eevrytjhing which we are tryinhg to remove
+            cartItem => cartItem.id !== action.payload.id
+          )
+        }
     default:
       return state;
   }
