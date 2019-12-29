@@ -27,3 +27,14 @@ export const selectCartItemsCount = createSelector(
       0
     )
 );
+
+// To get the total cost in the cart by using reducer()
+export const selectCartTotal = createSelector(
+  [selectCartItems],
+  cartItems =>
+    cartItems.reduce(
+      (accumalatedQuantity, cartItem) =>
+        accumalatedQuantity + cartItem.quantity * cartItem.price,
+      0
+    )
+)
