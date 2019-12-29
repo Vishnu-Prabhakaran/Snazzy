@@ -10,7 +10,13 @@ export const addItem = item => ({
     payload: item
 });
 
-// Removes items from the cart
+// Remove Item QTY from the cart
+export const removeItem = item => ({
+  type: CartActionTypes.REMOVE_ITEM,
+  payload: item
+})
+
+// Delete items from the cart
 export const clearItemFromCart = item => ({
   type: CartActionTypes.CLEAR_ITEM_FROM_CART,
   payload: item
