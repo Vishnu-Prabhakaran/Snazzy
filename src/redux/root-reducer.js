@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import userReducer from "./user/user.reducer";
 import cartReducer from "./cart/cart.reducer";
 import directoryReducer from "./directory/directory.reducer";
+import shopReducer from "./shop/shop.reducer";
 
 // Local Storage (2) step
 import { persistReducer } from "redux-persist";
@@ -21,8 +22,10 @@ const rootReducer = combineReducers({
   user: userReducer,
   // Cart on the other hand need to be stored into the local persist
   cart: cartReducer,
-  // directory redux
-  directory: directoryReducer
+  // Directory Redux State
+  directory: directoryReducer,
+  // Shop Redux State
+  shop: shopReducer
 });
 
 // Modified version of the rootReducer with persist on top
