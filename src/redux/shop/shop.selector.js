@@ -7,9 +7,14 @@ export const selectCollections = createSelector(
   shop => shop.collections
 );
 
+export const selectCollectionsForPreview = createSelector(
+  [selectCollections],
+  collections => Object.keys(collections).map(key => collections[key])
+);
+
 export const selectCollection = collectionUrlParam =>
   createSelector(
     [selectCollections],
-    // Find collection.id matching the url parameter of our collection if map
+    // Find collection.id matching the url parameter of our collection of map
     collections => collections[collectionUrlParam]
   );
