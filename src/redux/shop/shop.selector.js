@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 const selectShop = state => state.shop;
 
@@ -15,6 +15,5 @@ export const selectCollectionsForPreview = createSelector(
 export const selectCollection = collectionUrlParam =>
   createSelector(
     [selectCollections],
-    // Find collection.id matching the url parameter of our collection of map
     collections => collections[collectionUrlParam]
   );
