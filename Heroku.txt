@@ -1,0 +1,19 @@
+
+Login to heroku firsy 
+
+$ heroku Login
+
+
+Then use the command line tool to to build app 
+
+$ heroku create snazzy-live --buildpack https://github.com/mars/create-react-app-buildpack.git
+
+Once done put it to heroku master 
+
+$ heroku git:remote -a snazzy-live
+
+$ git push heroku master
+
+
+
+*** Firebase Login wont work because we need to add the heroku domian under firebase as authorised domains.
