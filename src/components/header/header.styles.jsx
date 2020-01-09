@@ -1,11 +1,6 @@
-import  styled , {css } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-// CSS from styled-componengs allows to write a block of CSS inside the JS
-const OptionContainerStyles = css`
-  padding: 10px 15px;
-  cursor: pointer;
-`;
 export const HeaderComponent = styled.div`
   height: 100%;
   width: 100%;
@@ -20,10 +15,16 @@ export const LogoContainer = styled(Link)`
   padding: 25px;
 `;
 
+export const OptionsContainer = styled.div`
+  height: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
 // Including the common CSS styles
 export const OptionLink = styled(Link)`
-  ${OptionContainerStyles}
-`;
-export const OptionDiv = styled.div`
-  ${OptionContainerStyles}
+  padding: 10px 15px;
+  cursor: pointer;
 `;

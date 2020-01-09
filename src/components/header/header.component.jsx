@@ -1,6 +1,6 @@
 import React from "react";
 // Styled-Component
-import { HeaderComponent, LogoContainer, OptionLink, OptionDiv } from "./header.styles";
+import { HeaderComponent, LogoContainer, OptionsContainer, OptionLink } from "./header.styles";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/cart-icon.component";
@@ -22,26 +22,18 @@ const Header = ({ currentUser, hidden }) => (
     <LogoContainer to="/">
       <Logo className="logo" />
     </LogoContainer>
-    <OptionDiv>
-      <OptionLink to="/shop">
-        SHOP
-      </OptionLink>
-      <OptionLink to="/shop">
-        CONTACT
-      </OptionLink>
+    <OptionsContainer>
+      <OptionLink to="/shop">SHOP</OptionLink>
+      <OptionLink to="/shop">CONTACT</OptionLink>
 
       {// Conditional to show the sign in and sign out
       currentUser ? (
-        <OptionDiv onClick={() => auth.signOut()}>
-          SIGN OUT
-        </OptionDiv>
+        <OptionLink as='div'  onClick={() => auth.signOut()}>SIGN OUT</OptionLink>
       ) : (
-        <OptionLink to="/signin">
-          SIGN IN
-        </OptionLink>
+        <OptionLink to="/signin">SIGN IN</OptionLink>
       )}
       <CartIcon />
-    </OptionDiv>
+    </OptionsContainer>
 
     {hidden ? null : <CardDropdown />}
   </HeaderComponent>
