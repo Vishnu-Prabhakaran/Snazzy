@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "firebase": "^7.5.2",
+    "jshint": "^2.11.0-rc1",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -14,7 +15,8 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "styled-components": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "jshintConfig":{
+    "esversion": 6 
+}
 }
