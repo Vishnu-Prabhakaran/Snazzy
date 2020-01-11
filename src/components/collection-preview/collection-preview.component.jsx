@@ -1,22 +1,26 @@
 import React from "react";
-import "./collection-preview.styles.scss";
+
 import CollectionItem from "../collection-item/collection-item.component";
+import {
+  CollectionPreviewComponent,
+  CollectionTitleComponent,
+  CollectionPreviewItemComponent
+} from "./collection.preview.styles";
 
 const CollectionPreview = ({ title, items }) => (
-  <div className="collection-preview">
-    <h1 className="title"> {title.toUpperCase()}</h1>
+  <CollectionPreviewComponent>
+    <CollectionTitleComponent> {title.toUpperCase()}</CollectionTitleComponent>
 
-    <div className="preview">
+    <CollectionPreviewItemComponent>
       {items
         .filter((item, idx) => idx < 4)
         //.map(({ id, ...otherItemProps }) => (<CollectionItem key={id} {...otherItemProps} />))
         // instead of separating, we take the whole 'item' and destructure it later
-        .map((item) => (
+        .map(item => (
           <CollectionItem key={item.id} item={item} />
-        ))
-      }
-    </div>
-  </div>
+        ))}
+    </CollectionPreviewItemComponent>
+  </CollectionPreviewComponent>
 );
 //without filter to display only 4 items
 //idx  = index

@@ -28,7 +28,7 @@ const buttonStyles = css`
   border: none;
 
   &:hover {
-    background-color: red;
+    background-color: green;
     color: black;
     border: 1px solid black;
   }
