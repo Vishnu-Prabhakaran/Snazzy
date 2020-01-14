@@ -47,6 +47,25 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+// Takes a collection key and the objects we want to add in which can be ina an array
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  // Create the collection using the collection key
+  const collectionRef = firestore.collection(collectionKey);
+  console.log(collectionRef);
+
+  // firestore batch - is a way of grouping all objects together and bathing it to the firestore.
+  // incase it was not fully transferred then nothing will be on the database -so it will be error free from partial data
+  const batch = firestore.batch();
+  // Loop through the collection
+  objectsToAdd.forEach(obj => {
+    // create a new doc with a random id
+    const newDocRef = collectionRef.doc();
+    console.log(newDocRef);
+    batch.set(newDocRef, obj);
+  });
+  return await batch.commit();
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
