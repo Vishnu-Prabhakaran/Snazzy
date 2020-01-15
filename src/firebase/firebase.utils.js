@@ -48,10 +48,13 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 // Takes a collection key and the objects we want to add in which can be ina an array
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
   // Create the collection using the collection key
   const collectionRef = firestore.collection(collectionKey);
-  console.log(collectionRef);
+  //console.log(collectionRef);
 
   // firestore batch - is a way of grouping all objects together and bathing it to the firestore.
   // incase it was not fully transferred then nothing will be on the database -so it will be error free from partial data
@@ -60,10 +63,31 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   objectsToAdd.forEach(obj => {
     // create a new doc with a random id
     const newDocRef = collectionRef.doc();
-    console.log(newDocRef);
+    //console.log(newDocRef);
     batch.set(newDocRef, obj);
   });
   return await batch.commit();
+};
+
+// getting shop values from the firebase
+
+export const convertCollectionSnapShotToMap = collections => {
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+    //console.log(collections);
+    return {
+      // With encodeUri, you can pass in any string and it will return a string with characters which a url cannot process.
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    };
+  });
+  // console.log(`Transformed Collection ${transformedCollection}`)
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
 };
 
 firebase.initializeApp(config);

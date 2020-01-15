@@ -13,11 +13,8 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 // Firebase
 import {
   auth,
-  createUserProfileDocument,
-  addCollectionAndDocuments
+  createUserProfileDocument
 } from "../src/firebase/firebase.utils";
-// To fire one time -Firestore
-import { selectCollectionsForPreview } from "./redux/shop/shop.selector";
 
 // Using second function of connect 'Dispatch'
 // Connect to update the reducer
@@ -40,7 +37,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, collectionsArray } = this.props;
+    const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       // if userAuth is not null save it to state
@@ -70,11 +67,6 @@ class App extends React.Component {
       }
       // else setsate to null
       setCurrentUser(userAuth);
-      // collections
-      addCollectionAndDocuments(
-        "collections",
-        collectionsArray.map(({ title, items }) => ({ title, items }))
-      );
     });
   }
 
@@ -115,8 +107,7 @@ class App extends React.Component {
 
 // Getting values form the Cache instead of the redux state
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  collectionsArray: selectCollectionsForPreview
+  currentUser: selectCurrentUser
 });
 
 // Null as the first argumenst as we do not need any state to props from the reducer
