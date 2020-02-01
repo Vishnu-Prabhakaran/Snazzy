@@ -22,3 +22,10 @@ export const selectIsCollectionFetching = createSelector(
   [selectShop],
   shop => shop.isFetching
 );
+
+// !! - shot cut to get the boolean value (double bang)
+// Example: !!0 = false, !!'' = false, !!null = false, !!{} true (empty object)
+export const selectorIsCollectionsLoaded = createSelector(
+  [selectShop],
+  shop => !!shop.collections
+)
