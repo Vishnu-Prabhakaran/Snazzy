@@ -1,5 +1,5 @@
 // takeEvery - listens for every types of actions that we pass it
-import { takeEvery, call, put } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 import ShopActionTypes from "./shop.types";
 import {
   firestore,
@@ -41,7 +41,8 @@ export function* fetchCollectionsAsync() {
 
 export function* fetchCollectionStart() {
   // The second parameter is another generatior function which will run in response to takeEvery() listner
-  yield takeEvery(
+  // takeLatest - only takes the last action fired, as we dont want to make multiple api calls.
+  yield takeLatest(
     ShopActionTypes.FETCH_COLLECTIONS_START,
     fetchCollectionsAsync
   );

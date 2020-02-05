@@ -4,10 +4,11 @@ import rootReducer from "./root-reducer";
 
 // Redux Saga
 import createSagaMiddleware from "redux-saga";
-import { fetchCollectionStart } from "./shop/shop.sagas";
+import rootSaga from "./root-saga";
 
 // Local Storage (1) step
 import { persistStore } from "redux-persist";
+
 
 // If the node enviorment is production then no logger
 // Else if it is in development logger enabled
@@ -19,8 +20,8 @@ if (process.env.NODE_ENV === "development") {
 }
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
-// Saga
-sagaMiddleware.run(fetchCollectionStart);
+// Root Saga
+sagaMiddleware.run(rootSaga);
 
 // Call the persistStore and pass in the store
 export const persistor = persistStore(store);
