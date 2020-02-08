@@ -10,12 +10,6 @@ import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import CheckoutPage from "./pages/checkout/checkout.component";
 
-// Firebase
-import {
-  auth,
-  createUserProfileDocument
-} from "../src/firebase/firebase.utils";
-
 // Using second function of connect 'Dispatch'
 // Connect to update the reducer
 import { connect } from "react-redux";
@@ -25,20 +19,8 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user.selector";
 
 class App extends React.Component {
-  // redux - sate managment -this is not required
-  //constructor() {
-  //super();
-  //set state as null
-  //this.state = {
-  //currentUser: null
-  //};
-  //}
-  // to unmount the subscription
+  // To unmount the subscription
   unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const { setCurrentUser } = this.props;
-  }
 
   // Signout
   componentWillUnmount() {

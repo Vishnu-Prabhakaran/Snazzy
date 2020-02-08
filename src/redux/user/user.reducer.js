@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   error: null
 };
 
-//ES6 you can assign a value to the function (state = INITIAL_STATE)
+// ES6 you can assign a value to the function (state = INITIAL_STATE)
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

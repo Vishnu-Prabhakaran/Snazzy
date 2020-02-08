@@ -20,7 +20,6 @@ export const googleSignInFailure = error => ({
 });
 
 // Email Sign in
-
 export const emailSignInStart = emailAndPassword => ({
   type: UserActionTypes.EMAIL_SIGN_IN_START,
   payload: emailAndPassword
@@ -31,6 +30,6 @@ export const emailSignInSuccess = user => ({
   payload: user
 });
 export const emailSignInFailure = error => ({
-  type: UserActionTypes.emailSignInFailure,
+  type: UserActionTypes.GOOGLE_SIGN_IN_FAILURE,
   payload: error
 });
