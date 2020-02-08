@@ -17,7 +17,8 @@ import { selectCurrentUser } from "../../redux/user/user.selector";
 
 // Once you pull the value of current user and hidden from redux state to use below
 
-const Header = ({ currentUser, hidden }) => (
+const Header = ({ currentUser, hidden },) => (
+  
   <HeaderComponent>
     <LogoContainer to="/">
       <Logo className="logo" />
@@ -28,6 +29,7 @@ const Header = ({ currentUser, hidden }) => (
 
       {// Conditional to show the sign in and sign out
       currentUser ? (
+        console.log(`User signed in props is ${currentUser}`),
         <OptionLink as='div'  onClick={() => auth.signOut()}>SIGN OUT</OptionLink>
       ) : (
         <OptionLink to="/signin">SIGN IN</OptionLink>
