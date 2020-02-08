@@ -7,14 +7,24 @@ import {
 } from "../../firebase/firebase.utils";
 import { signInSuccess, signInFailure } from "./user.actions";
 
-export function* signInWithGoogle() {
-  // Any code we write with an API have a chance to fail, so we need try catch block
+// Reusable generator
+export function* getSnapShotFromUserAuth(userAuth) {
   try {
-    const { user } = yield auth.signInWithPopup(googleProvider);
-    const userRef = yield call(createUserProfileDocument, user);
+    const userRef = yield call(createUserProfileDocument, userAuth);
     const userSnapshot = yield userRef.get();
     // put() put things back into regular Redux flow
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+  } catch (error) {
+    yield put(signInFailure(error));
+  }
+}
+
+export function* signInWithGoogle() {
+  // Any code we write with an API have a chance to fail, so we need try catch block
+  // Keep the try catch block to if errros in Popup
+  try {
+    const { user } = yield auth.signInWithPopup(googleProvider);
+    yield getSnapShotFromUserAuth(user);
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -26,12 +36,10 @@ export function* onGoogleSignInStart() {
 
 // Destructure the payload to get the username and password
 export function* signInWithEmail({ payload: { email, password } }) {
+  // Keep the try catch block to if errros in sign in with email and password
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    const userRef = yield call(createUserProfileDocument, user);
-    const userSnapshot = yield userRef.get();
-    // put() put things back into regular Redux flow
-    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+    yield getSnapShotFromUserAuth(user);
   } catch (error) {
     yield put(signInFailure(error));
   }
