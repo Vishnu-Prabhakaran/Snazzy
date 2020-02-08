@@ -92,6 +92,17 @@ export const convertCollectionSnapShotToMap = collections => {
 
 firebase.initializeApp(config);
 
+// Session to get the user signed in or signed out
+// Promise will resolve the correct user if there is one, else it will return null
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
