@@ -38,39 +38,9 @@ class App extends React.Component {
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
-
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      // if userAuth is not null save it to state
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot(snapShot => {
-          // this.props.setCurrentUser({
-          // destructured props
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-          //consile.log set state has to be caled as a second function to see the state
-          // cannot see setstate outside
-          //this.setState(
-          //{currentUser: {
-          //id: snapShot.id,
-          //...snapShot.data()}}
-          // to see the setsate, call as a second function
-          //() => { console.log(this.state);}
-          //);
-          //console.log(this.state);
-        });
-        //this wont work here
-        //console.log(this.state);
-      }
-      // else setsate to null
-      setCurrentUser(userAuth);
-    });
   }
 
-  // signout
+  // Signout
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
