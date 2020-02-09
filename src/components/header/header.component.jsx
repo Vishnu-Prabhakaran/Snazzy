@@ -32,12 +32,9 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
 
       {// Conditional to show the sign in and sign out
       currentUser ? (
-        (console.log(`User signed in props is ${currentUser}`),
-        (
-          <OptionLink to="/" as="div" onClick={signOutStart}>
-            SIGN OUT
-          </OptionLink>
-        ))
+        <OptionLink to="/" as="div" onClick={signOutStart}>
+          SIGN OUT
+        </OptionLink>
       ) : (
         <OptionLink to="/signin">SIGN IN</OptionLink>
       )}

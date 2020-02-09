@@ -1,10 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 import { SignUpComponent, SignUpTitleComponent } from "./sign-up.styles";
+import { signUpStart } from "../../redux/user/user.actions";
 
 class SignUp extends React.Component {
   constructor() {
@@ -18,42 +19,24 @@ class SignUp extends React.Component {
     };
   }
 
-  //handlers
+  // Handlers
   handleSubmit = async event => {
-    //prevent default action
+    // Prevent default action
     event.preventDefault();
+    const { signUpStart } = this.props;
 
     const { displayName, email, password, confirmPassword } = this.state;
 
-    //if password dont match return
+    // If password dont match return
     if (password !== confirmPassword) {
       alert("Password don't match");
       return;
     }
-    try {
-      //on sucessful creation, user will also be signed into the application
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      //when await finishes, this set sate initial state where everything is empty to rest the form
-      await createUserProfileDocument(user, { displayName });
-      this.setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    signUpStart({ displayName, email, password });
   };
-
-  //handle Change
+  // Handle Change
   handleChange = event => {
     const { name, value } = event.target;
-
     this.setState({ [name]: value });
   };
 
@@ -104,4 +87,8 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = dispatch => ({
+  signUpStart: userCredentials => dispatch(signUpStart(userCredentials))
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);
