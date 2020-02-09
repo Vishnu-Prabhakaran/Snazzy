@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Header from "./components/header/header.component";
 
@@ -18,51 +18,34 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user.selector";
 
-// check user session
+// Check user session
 import { checkUserSession } from "./redux/user/user.actions";
 
-class App extends React.Component {
-  // To unmount the subscription
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const { checkUserSession } = this.props;
+const App = ({ checkUserSession, currentUser }) => {
+  // useEffect is similar to componentDidMount
+  useEffect(() => {
     checkUserSession();
-  }
-  // Signout
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+    // [] dennotes to with call the use effect should run, else it will run endlessly
+  }, [checkUserSession]);
 
-  render() {
-    return (
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to="/" />
-              ) : (
-                <SignInAndSignUpPage />
-              )
-            }
-          />
-        </Switch>
-      </div>
-    );
-  }
-}
-
-// current user from the redux state
-// const mapStateToProps = ({ user }) => ({
-// currentUser: user.currentUser
-// });
+  return (
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+          }
+        />
+      </Switch>
+    </div>
+  );
+};
 
 // Getting values form the Cache instead of the redux state
 const mapStateToProps = createStructuredSelector({
