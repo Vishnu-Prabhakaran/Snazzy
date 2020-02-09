@@ -2,6 +2,7 @@
   "name": "snazzy",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "eslint": "^6.8.0",
     "firebase": "^7.6.1",
