@@ -8,9 +8,22 @@ import {
 import CollectionItem from "../../components/collection-item/collection-item.component";
 import { connect } from "react-redux";
 import { selectCollection } from "../../redux/shop/shop.selector";
+//import { firestore } from "../../firebase/firebase.utils";
 
 const CollectionPage = ({ collection }) => {
-  //console.log(`collection - ${collection}`)
+  // // Hooks with clean up function
+  // useEffect(() => {
+  //   console.log("I am subscribing");
+  //   const unsubscribeFromCollections = firestore
+  //     .collection("collections")
+  //     .onSnapshot(snapshot => console.log(snapshot));
+  //   // Clean up function
+  //   return () => {
+  //     console.log("I am unsubscribing");
+  //     unsubscribeFromCollections();
+  //   };
+  // }, []);
+
   const { title, items } = collection;
   return (
     <CollectionPageComponent>

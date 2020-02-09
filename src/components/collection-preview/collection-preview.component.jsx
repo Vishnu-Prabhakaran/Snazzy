@@ -6,10 +6,16 @@ import {
   CollectionTitleComponent,
   CollectionPreviewItemComponent
 } from "./collection.preview.styles";
+import { withRouter } from "react-router-dom";
 
-const CollectionPreview = ({ title, items }) => (
+const CollectionPreview = ({ title, items, history, match, routeName }) => (
   <CollectionPreviewComponent>
-    <CollectionTitleComponent> {title.toUpperCase()}</CollectionTitleComponent>
+    <CollectionTitleComponent
+      onClick={() => history.push(`${match.path}/${routeName}`)}
+    >
+      {" "}
+      {title.toUpperCase()}
+    </CollectionTitleComponent>
 
     <CollectionPreviewItemComponent>
       {items
@@ -26,4 +32,4 @@ const CollectionPreview = ({ title, items }) => (
 //idx  = index
 //{items.map(item => (<div key={item.id}> {item.name}</div>))}
 
-export default CollectionPreview;
+export default withRouter(CollectionPreview);

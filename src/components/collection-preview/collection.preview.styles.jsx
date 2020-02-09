@@ -9,6 +9,10 @@ export const CollectionPreviewComponent = styled.div`
 export const CollectionTitleComponent = styled.h1`
   font-size: 28px;
   margin-bottom: 25px;
+  cursor: pointer;
+  &:hover {
+    color: grey;
+  }
 `;
 
 export const CollectionPreviewItemComponent = styled.div`
