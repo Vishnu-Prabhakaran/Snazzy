@@ -1,5 +1,5 @@
 import CartActionTypes from "./cart.types";
-import { addItemToCart , removeItemFromCart} from "./cart.utils";
+import { addItemToCart, removeItemFromCart } from "./cart.utils";
 
 const INITIAL_STATE = {
   hidden: true,
@@ -24,24 +24,30 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         cartItems: addItemToCart(state.cartItems, action.payload)
       };
 
-      // Removes Item from the cart 
-      case CartActionTypes.REMOVE_ITEM: 
+    // Removes Item from the cart
+    case CartActionTypes.REMOVE_ITEM:
       return {
         ...state,
         // using Cart Utils
         cartItems: removeItemFromCart(state.cartItems, action.payload)
       };
-      // Delete items from the cart
-      case CartActionTypes.CLEAR_ITEM_FROM_CART:
-        return{
-          ...state,
-          // Call the existing cartitems in our array and use filter functiom
-          cartItems: state.cartItems.filter(
-            // If the cartitem id does not match the itemn we are trying to filter then return true
-            // Which means keep eevrytjhing which we are tryinhg to remove
-            cartItem => cartItem.id !== action.payload.id
-          )
-        }
+    // Delete items from the cart
+    case CartActionTypes.CLEAR_ITEM_FROM_CART:
+      return {
+        ...state,
+        // Call the existing cartitems in our array and use filter functiom
+        cartItems: state.cartItems.filter(
+          // If the cartitem id does not match the itemn we are trying to filter then return true
+          // Which means keep eevrytjhing which we are tryinhg to remove
+          cartItem => cartItem.id !== action.payload.id
+        )
+      };
+    // Clear cart
+    case CartActionTypes.CLEAR_CART:
+      return {
+        ...state,
+        cartItems: []
+      };
     default:
       return state;
   }
