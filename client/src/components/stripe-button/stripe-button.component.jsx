@@ -1,8 +1,10 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import { signOutStart } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
 
-const StripeCheckoutButton = ({ price }) => {
+const StripeCheckoutButton = ({ price, signOutStart }) => {
   // Stripe need to see in cents
   const priceForStrip = price * 100;
   // Stripe Key
@@ -20,6 +22,7 @@ const StripeCheckoutButton = ({ price }) => {
     })
       .then(response => {
         alert("Payment successful");
+        signOutStart();
       })
       .catch(error => {
         console.log("payment error: ", JSON.parse(error));
@@ -46,4 +49,8 @@ const StripeCheckoutButton = ({ price }) => {
   );
 };
 
-export default StripeCheckoutButton;
+const mapDispatchToProps = dispatch => ({
+  signOutStart: () => dispatch(signOutStart())
+});
+
+export default connect(null, mapDispatchToProps)(StripeCheckoutButton);
