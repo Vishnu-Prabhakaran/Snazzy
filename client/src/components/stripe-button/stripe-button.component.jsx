@@ -1,5 +1,6 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
 
 const StripeCheckoutButton = ({ price }) => {
   // Stripe need to see in cents
@@ -9,8 +10,23 @@ const StripeCheckoutButton = ({ price }) => {
 
   // Token which is send to the back end to create the charge
   const onToken = token => {
-    console.log(token);
-    alert("Payment Successful");
+    axios({
+      url: "payment",
+      method: "post",
+      data: {
+        amount: priceForStrip,
+        token
+      }
+    })
+      .then(response => {
+        alert("Payment successful");
+      })
+      .catch(error => {
+        console.log("payment error: ", JSON.parse(error));
+        alert(
+          "There was an issue with your payment. Please make sure to use the provider credit card"
+        );
+      });
   };
 
   return (

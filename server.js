@@ -23,6 +23,7 @@ app.use(cors());
 // Express static middle ware function - only by using route
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
+
   // Any url that the user hits, we pass a function
   app.get("*", function(req, res) {
     res.sendFile()(path.join(__dirname, "client/build", "index.html"));
