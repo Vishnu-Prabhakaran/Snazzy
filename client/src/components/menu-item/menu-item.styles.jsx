@@ -1,7 +1,27 @@
 import styled, { css } from "styled-components";
 
-const LargeStyle = css`
-  height: 380px;
+export const MenuItemComponent = styled.div`
+  height: ${({ size }) => (size ? "380px" : "240px")}
+  min-width: 30%;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  margin: 0 7.5px 15px;
+  overflow: hidden;
+
+  &:hover {
+    cursor: pointer;
+    
+    & .background-image {
+         transform: scale(1.1);
+        transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    }
+    & .content {
+      opacity: 0.9;
+    }
+  }
 
   &:first-child {
     margin-right: 7.5px;
@@ -10,31 +30,10 @@ const LargeStyle = css`
   &:last-child {
     margin-left: 7.5px;
   }
-`;
-
-// Function to check the condition bsed on the Props
-const getPropStyles = props => {
-  if (props === "Large") {
-    return LargeStyle;
-    
-  }
-};
-
-export const MenuItemComponent = styled.div`
-  min-width: 30%;
-  height: 240px;
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-  margin: 07.5px 15px;
-  overflow: hidden;
-
-  &:hover {
-    cursor: pointer;
-  }
-  ${getPropStyles}
+  
+  @media screen and (max-width: 800px) {
+    height: 200px;
+}
 `;
 
 export const MenuItemBgImageComponent = styled.div`
@@ -42,11 +41,7 @@ export const MenuItemBgImageComponent = styled.div`
   height: 100%;
   background-position: center;
   background-size: cover;
-  &:hover {
-    opacity: 0.9;
-    transform: scale(1.1);
-    transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-  }
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
 
 export const MenuItemContentComponent = styled.div`
@@ -73,5 +68,4 @@ export const MenuItemSubTitleComponent = styled.span`
   font-weight: lighter;
   margin-bottom: 6px;
   font-size: 16px;
-  color: #4a4a4a;
 `;

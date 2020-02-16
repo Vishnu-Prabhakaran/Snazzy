@@ -8,6 +8,10 @@ export const CollectionItemComponent = styled.div`
   height: 350px;
   align-items: center;
   position: relative;
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+  }
 `;
 
 export const CollectionItemImageComponent = styled.div`
@@ -30,6 +34,12 @@ export const CollectionItemButtonComponent = styled(CustomButton)`
   &:hover {
     display: flex;
     opacity: 0.85;
+  }
+  @media screen and (max-width: 800px) {
+    display: block;
+    opacity: 0.9;
+    min-width: unset;
+    padding: 0 10px;
   }
 `;
 

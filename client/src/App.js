@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import "./App.css";
+// Global styles
+import { GlobalStyle } from "./global.styles";
 import Header from "./components/header/header.component";
 
 // Pages
@@ -30,6 +31,7 @@ const App = ({ checkUserSession, currentUser }) => {
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

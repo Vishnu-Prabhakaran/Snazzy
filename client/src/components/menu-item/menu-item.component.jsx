@@ -12,7 +12,7 @@ import { withRouter } from "react-router-dom";
 
 const MenuItem = ({ title, imageUrl, size, linkUrl, history, match }) => (
   <MenuItemComponent
-    props={size}
+    size={size}
     onClick={() =>
       history.push(
         `${match.url}${linkUrl}`
@@ -21,9 +21,8 @@ const MenuItem = ({ title, imageUrl, size, linkUrl, history, match }) => (
     }
   >
     <MenuItemBgImageComponent
-      style={{
-        backgroundImage: `url(${imageUrl})`
-      }}
+      className="background-image"
+      imageUrl={imageUrl}
     />
     <MenuItemContentComponent>
       <MenuItemTitleComponent> {title.toUpperCase()}</MenuItemTitleComponent>
