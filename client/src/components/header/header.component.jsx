@@ -28,7 +28,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
     </LogoContainer>
     <OptionsContainer>
       <OptionLink to="/shop">SHOP</OptionLink>
-      <OptionLink to="/shop">CONTACT</OptionLink>
+      <OptionLink to="/contact">CONTACT</OptionLink>
 
       {// Conditional to show the sign in and sign out
       currentUser ? (

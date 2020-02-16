@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
+const nodemailer = require("nodemailer");
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
@@ -12,6 +13,11 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const app = express();
 // Port - Server port will be different than local host 3000
 const port = process.env.PORT || 5000;
+
+// Port display
+// app.listen(port, () => {
+//   console.log('We are live on port');
+// });
 
 // Convert all request to json
 app.use(bodyParser.json());
@@ -30,10 +36,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Listen to port fo errors
+// Listen to port for errors
 app.listen(port, error => {
   if (error) throw error;
-  console.log("Server running on port" + port);
+  console.log("Server running on port " + port);
 });
 
 // Payment route
@@ -52,3 +58,66 @@ app.post("/payment", (req, res) => {
     }
   });
 });
+
+// Email
+
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/public", "index.html"));
+});
+
+
+
+
+
+// Chunk 1
+//require('dotenv').config();
+//const sendMail = require('./mail');
+const { log } = console;
+
+
+// Data parsing
+app.use(express.urlencoded({
+    extended: false
+}));
+app.use(express.json());
+
+
+// Send email
+// Email successfullyu receivng from contact
+app.post("/email", (req, res) => {
+  console.log('Data', req.body)
+  res.json({ message: " Message received!!!" });
+});
+
+// // email, subject, text
+// app.post('/email', (req, res) => {
+//     const { subject, email, text } = req.body;
+//     log('Data: ', req.body);
+
+//     sendMail(email, subject, text, function(err, data) {
+//         if (err) {
+//             log('ERROR: ', err);
+//             return res.status(500).json({ message: err.message || 'Internal Error' });
+//         }
+//         log('Email sent!!!');
+//         return res.json({ message: 'Email sent!!!!!' });
+//     });
+// });
+
+
+// // Render home page
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'index.html'));
+// });
+
+// // Error page
+// app.get('/error', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'error.html'));
+// });
+
+// // Email sent page
+// app.get('/email/sent', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'emailMessage.html'));
+// });
+
