@@ -1,8 +1,8 @@
-import React, { useState, Component } from "react";
-import axios from "axios";
-import { ContactFormComponent, labelComponent } from "./contact.styles";
-import ContactFormInput from "./contact-form.component";
-import CustomButton from "../../components/custom-button/custom-button.component";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { ContactFormComponent } from './contact.styles';
+import ContactFormInput from './contact-form.component';
+import CustomButton from '../../components/custom-button/custom-button.component';
 
 class ContactPage extends Component {
   // const [name, setName ] = useState('');
@@ -12,19 +12,19 @@ class ContactPage extends Component {
   // const [buttonText, setButtontext] = useState('Send Message');
 
   state = {
-    name: "",
-    message: "",
-    email: "",
+    name: '',
+    message: '',
+    email: '',
     sent: false,
-    buttonText: "Send Message"
+    buttonText: 'Send Message'
   };
 
   resetForm = () => {
     this.setState({
-      name: "",
-      message: "",
-      email: "",
-      buttonText: "Message Sent"
+      name: '',
+      message: '',
+      email: '',
+      buttonText: 'Message Sent'
     });
   };
 
@@ -32,7 +32,7 @@ class ContactPage extends Component {
     e.preventDefault();
 
     this.setState({
-      buttonText: "...sending"
+      buttonText: '...sending'
     });
 
     let data = {
@@ -42,18 +42,17 @@ class ContactPage extends Component {
     };
 
     axios
-      .post("/email", data)
+      .post('/email', data)
       .then(res => {
         this.setState({ sent: true }, this.resetForm());
-        console.log("Message sent",data );
+        console.log('Message sent', data);
       })
       .catch(() => {
-        console.log("Message not sent");
+        console.log('Message not sent');
       });
   };
 
   render() {
-    
     return (
       <ContactFormComponent>
         <h2> Contact Page</h2>
@@ -62,30 +61,30 @@ class ContactPage extends Component {
         </span>
         <form onSubmit={e => this.formSubmit(e)}>
           <ContactFormInput
-            type="text"
-            name="name"
+            type='text'
+            name='name'
             value={this.state.name}
             onChange={e => this.setState({ name: e.target.value })}
-            label="Name"
+            label='Name'
             required
           />
           <ContactFormInput
-            type="text"
-            name="email"
+            type='text'
+            name='email'
             value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
-            label="Email"
+            label='Email'
             required
           />
           <ContactFormInput
-            type="text"
-            name="message"
+            type='text'
+            name='message'
             value={this.state.message}
             onChange={e => this.setState({ message: e.target.value })}
-            label="Message"
+            label='Message'
             required
           />
-          <CustomButton type="submit">{this.state.buttonText}</CustomButton>
+          <CustomButton type='submit'>{this.state.buttonText}</CustomButton>
         </form>
       </ContactFormComponent>
     );
