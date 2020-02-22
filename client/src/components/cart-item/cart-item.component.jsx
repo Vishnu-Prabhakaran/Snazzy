@@ -16,5 +16,6 @@ const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
     </ItemDetailsComponent>
   </CartItemComponent>
 );
-
-export default CartItem;
+// React memo to memorise components not using redux 
+// By using React memo it wont re-render the whole components
+export default React.memo(CartItem);
