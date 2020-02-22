@@ -1,13 +1,16 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const path = require("path");
-const nodemailer = require("nodemailer");
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const path = require('path');
+// Compression
+const compression = require('compression');
+// Email
+const nodemailer = require('nodemailer');
 
-if (process.env.NODE_ENV !== "production") require("dotenv").config();
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 // Stripe library
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Express
 const app = express();
@@ -19,6 +22,8 @@ const port = process.env.PORT || 5000;
 //   console.log('We are live on port');
 // });
 
+// Compression
+app.use(compression());
 // Convert all request to json
 app.use(bodyParser.json());
 // Encod url
@@ -27,27 +32,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 // Express static middle ware function - only by using route
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
 
   // Any url that the user hits, we pass a function
-  app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 }
 
 // Listen to port for errors
 app.listen(port, error => {
   if (error) throw error;
-  console.log("Server running on port " + port);
+  console.log('Server running on port ' + port);
 });
 
 // Payment route
-app.post("/payment", (req, res) => {
+app.post('/payment', (req, res) => {
   const body = {
     source: req.body.token.id,
     amount: req.body.amount,
-    currency: "aud"
+    currency: 'aud'
   };
   // Charges
   stripe.charges.create(body, (stripeErr, stripeRes) => {
@@ -61,33 +66,28 @@ app.post("/payment", (req, res) => {
 
 // Email
 
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/public", "index.html"));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
 });
-
-
-
-
 
 // Chunk 1
 //require('dotenv').config();
 //const sendMail = require('./mail');
 const { log } = console;
 
-
 // Data parsing
-app.use(express.urlencoded({
+app.use(
+  express.urlencoded({
     extended: false
-}));
+  })
+);
 app.use(express.json());
-
 
 // Send email
 // Email successfullyu receivng from contact
-app.post("/email", (req, res) => {
-  console.log('Data', req.body)
-  res.json({ message: " Message received!!!" });
+app.post('/email', (req, res) => {
+  console.log('Data', req.body);
+  res.json({ message: ' Message received!!!' });
 });
 
 // // email, subject, text
@@ -105,7 +105,6 @@ app.post("/email", (req, res) => {
 //     });
 // });
 
-
 // // Render home page
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'views', 'index.html'));
@@ -120,4 +119,3 @@ app.post("/email", (req, res) => {
 // app.get('/email/sent', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'views', 'emailMessage.html'));
 // });
-
