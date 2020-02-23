@@ -47,6 +47,11 @@ app.listen(port, error => {
   console.log('Server running on port ' + port);
 });
 
+// Service worker - when ever the application required the service-Worker.js file, get it from the build folder
+app.get('/service-worker.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'service-Worker.js'));
+});
+
 // Payment route
 app.post('/payment', (req, res) => {
   const body = {
