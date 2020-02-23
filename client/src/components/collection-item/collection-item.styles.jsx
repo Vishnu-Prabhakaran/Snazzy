@@ -58,5 +58,5 @@ export const CollectionItemNameComponent = styled.span`
   margin-bottom: 15px;
 `;
 export const CollectionItemPriceComponent = styled.span`
-  width: 10%;
+ 
 `;

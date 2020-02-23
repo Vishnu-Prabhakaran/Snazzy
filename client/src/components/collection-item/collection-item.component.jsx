@@ -24,7 +24,7 @@ const CollectionItem = ({ item, addItem }) => {
       />
       <CollectionItemFooterComponent>
         <CollectionItemNameComponent> {name}</CollectionItemNameComponent>
-        <CollectionItemPriceComponent> {price}</CollectionItemPriceComponent>
+        <CollectionItemPriceComponent> ${price}</CollectionItemPriceComponent>
       </CollectionItemFooterComponent>
       <CollectionItemButtonComponent onClick={() => addItem(item)} inverted>
         {" "}
