@@ -9,7 +9,7 @@ export const HeaderComponent = styled.div`
   margin-bottom: 25px;
 
   @media screen and (max-width: 800px) {
-    height 60px;
+    height: 60px;
     padding: 10px;
     margin-bottom: 20px
 }
@@ -41,5 +41,12 @@ export const OptionsContainer = styled.div`
 // Including the common CSS styles
 export const OptionLink = styled(Link)`
   padding: 10px 15px;
+  cursor: pointer;
+`;
+
+export const LogoText = styled(Link)`
+  padding: 0px 5px 5px 6px;
+  color: purple;
+  font-weight: bold;
   cursor: pointer;
 `;

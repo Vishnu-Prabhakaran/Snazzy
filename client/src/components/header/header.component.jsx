@@ -4,7 +4,8 @@ import {
   HeaderComponent,
   LogoContainer,
   OptionsContainer,
-  OptionLink
+  OptionLink,
+  LogoText
 } from "./header.styles";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
@@ -25,7 +26,9 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
   <HeaderComponent>
     <LogoContainer to="/">
       <Logo className="logo" />
+      <LogoText> SNAZZY</LogoText>
     </LogoContainer>
+      
     <OptionsContainer>
       <OptionLink to="/shop">SHOP</OptionLink>
       <OptionLink to="/contact">CONTACT</OptionLink>

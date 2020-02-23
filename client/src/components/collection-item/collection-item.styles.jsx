@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import CustomButton from "../custom-button/custom-button.component";
+import styled from 'styled-components';
+import CustomButton from '../custom-button/custom-button.component';
 
 export const CollectionItemComponent = styled.div`
   width: 22vw;
@@ -10,7 +10,9 @@ export const CollectionItemComponent = styled.div`
   position: relative;
 
   @media screen and (max-width: 800px) {
-    width: 40vw;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 `;
 
@@ -20,6 +22,7 @@ export const CollectionItemImageComponent = styled.div`
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;
+
   &:hover {
     opacity: 0.8;
   }
