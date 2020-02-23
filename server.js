@@ -7,7 +7,7 @@ const compression = require('compression');
 // Email
 const nodemailer = require('nodemailer');
 // Express SSLify
-const enforce = require('express-sslify')
+const enforce = require('express-sslify');
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
@@ -20,19 +20,21 @@ const app = express();
 // Port - Server port will be different than local host 3000
 const port = process.env.PORT || 5000;
 
-// Compression
-app.use(compression());
 // Convert all request to json
 app.use(bodyParser.json());
 // Encod url
 app.use(bodyParser.urlencoded({ extended: true }));
-// Enforce SSLify to force HTTPS, trustProtoHeader only for Heroku becaue of reverse proxy
-app.use(enforce.HTTPS({trustProtoHeader: true}))
 // Cors - Checks to make sure the origin is same
 app.use(cors());
 
 // Express static middle ware function - only by using route
 if (process.env.NODE_ENV === 'production') {
+  
+  // Compression
+  app.use(compression());
+  // Enforce SSLify to force HTTPS, trustProtoHeader only for Heroku becaue of reverse proxy
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+
   app.use(express.static(path.join(__dirname, 'client/build')));
 
   // Any url that the user hits, we pass a function
