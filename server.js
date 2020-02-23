@@ -29,7 +29,7 @@ app.use(cors());
 
 // Express static middle ware function - only by using route
 if (process.env.NODE_ENV === 'production') {
-  
+
   // Compression
   app.use(compression());
   // Enforce SSLify to force HTTPS, trustProtoHeader only for Heroku becaue of reverse proxy
@@ -78,9 +78,9 @@ app.get('/', (req, res) => {
 });
 
 // Chunk 1
-//require('dotenv').config();
-//const sendMail = require('./mail');
-const { log } = console;
+// require('dotenv').config();
+// const sendMail = require('./mail');
+// const { log } = console;
 
 // Data parsing
 app.use(
